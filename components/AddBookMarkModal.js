@@ -9,7 +9,7 @@ const AddBookMarkModal = ({ handleShow, show }) => {
     useAddBookMark();
   const [showNewCategory, setShowNewCategory] = useState(false);
 
-  console.log(inputData);
+  //   console.log(inputData);
   return (
     <ModalLayout handleShow={handleShow} show={show}>
       <form>
@@ -119,8 +119,8 @@ const AddBookMarkModal = ({ handleShow, show }) => {
             >
               <option value="">Select a category</option>
               <option value="1">Category 1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="2">Category 2</option>
+              <option value="3">Category 3</option>
             </select>
             <div>
               <button

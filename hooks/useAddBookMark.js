@@ -32,10 +32,12 @@ const useAddBookMark = () => {
           ? ""
           : " Title is required",
         urlError: inputData?.inputValue?.userName ? "" : "Url is required",
-        categoryError: inputData?.inputValue?.category,
-        newCategoryError: inputData?.inputValue?.newCategory
+        categoryError: inputData?.inputValue?.category
           ? ""
           : "Category is required",
+        newCategoryError: inputData?.inputValue?.newCategory
+          ? ""
+          : "New Category is required",
       },
     }));
     return false;
