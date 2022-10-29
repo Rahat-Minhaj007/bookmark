@@ -14,7 +14,7 @@ const ModalLayout = ({ children = null, handleShow, show }) => {
           <div className="relative">
             <h1 className="text-center text-white text-[24px] font-[600]">
               {" "}
-              Its a simple dialog.
+              Add Bookmarks
             </h1>
             <button
               type="button"

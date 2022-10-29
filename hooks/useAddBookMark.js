@@ -35,9 +35,10 @@ const useAddBookMark = () => {
         categoryError: inputData?.inputValue?.category
           ? ""
           : "Category is required",
-        newCategoryError: inputData?.inputValue?.newCategory
-          ? ""
-          : "New Category is required",
+        newCategoryError:
+          inputData?.inputValue?.newCategory || inputData?.inputValue?.category
+            ? ""
+            : "New Category is required",
       },
     }));
     return false;
