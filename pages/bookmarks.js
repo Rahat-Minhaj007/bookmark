@@ -1,7 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Bookmarks = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const data = window.localStorage.setItem("bookmarks", JSON.stringify([]));
+    setData(data);
+  }, []);
   return (
     <div>
       <div className="bg-primary">
@@ -15,6 +20,17 @@ const Bookmarks = () => {
         </ul>
       </div>
       <h1>Welcome to Bookmarks</h1>
+      {data?.map((item) => {
+        return (
+          <div key={item.title}>
+            <h1>{item.title}</h1>
+            <a href={item.url} target="_blank" rel="noreferrer">
+              Details
+            </a>
+            <h1>{item.category}</h1>
+          </div>
+        );
+      })}
     </div>
   );
 };
