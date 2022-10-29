@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 import React from "react";
 
 const Input = ({
@@ -28,14 +26,18 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         onClick={onClick}
-        className={`${className} input-field`}
+        className={className}
         disabled={disabled}
         readOnly={readOnly}
         accept={accept}
         onWheel={(e) => e.target.blur()}
         autoComplete="off"
       />
-      {error && <p style={{ textTransform: "lowercase" }}>{error}</p>}
+      {error && (
+        <p className="text-[12px] text-red-500 font-[500] lowercase pt-2">
+          {error}
+        </p>
+      )}
     </div>
   );
 };

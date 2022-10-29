@@ -1,10 +1,13 @@
 import { ThemeProvider } from "@material-tailwind/react";
+import ContextProvider from "../context/ContextProvider";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <ContextProvider>
+        <Component {...pageProps} />
+      </ContextProvider>
     </ThemeProvider>
   );
 }
