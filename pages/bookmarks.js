@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 const Bookmarks = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const data = window.localStorage.setItem("bookmarks", JSON.stringify([]));
-    setData(data);
+    const data = window.localStorage.getItem("bookmarks");
+    setData(JSON.parse(data));
   }, []);
   return (
     <div>
