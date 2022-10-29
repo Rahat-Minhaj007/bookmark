@@ -32,6 +32,7 @@ const useAddBookMark = () => {
           ? ""
           : " Title is required",
         urlError: inputData?.inputValue?.userName ? "" : "Url is required",
+        categoryError: inputData?.inputValue?.category,
         newCategoryError: inputData?.inputValue?.newCategory
           ? ""
           : "Category is required",
@@ -43,7 +44,28 @@ const useAddBookMark = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (checkInputValidity()) {
-      alert("submit");
+      const bookmarks = window.localStorage.getItem("bookmarks");
+      const bookmarksArray = JSON.parse(bookmarks);
+      const newBookMark = {
+        title: inputData?.inputValue?.title,
+        url: inputData?.inputValue?.url,
+        category: inputData?.inputValue?.category
+          ? inputData?.inputValue?.category
+          : inputData?.inputValue?.newCategory,
+      };
+      bookmarksArray.push(newBookMark);
+      window.localStorage.setItem("bookmarks", JSON.stringify(bookmarksArray));
+      setInputData((prev) => {
+        return {
+          ...prev,
+          inputValue: {
+            title: "",
+            url: "",
+            category: "",
+            newCategory: "",
+          },
+        };
+      });
     }
   };
 

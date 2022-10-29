@@ -8,11 +8,13 @@ function InputProvider({ children = null }) {
     inputValue: {
       title: "",
       url: "",
+      category: "",
       newCategory: "",
     },
     inputError: {
       titleError: "",
       urlError: "",
+      categoryError: "",
       newCategoryError: "",
     },
   });

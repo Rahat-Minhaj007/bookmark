@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { urlRegEx } from "../helpers/regex";
 import useAddBookMark from "../hooks/useAddBookMark";
 import ModalLayout from "./resuseable/ModalLayout";
@@ -7,6 +7,8 @@ import Input from "./resuseable/ReuseableInput";
 const AddBookMarkModal = ({ handleShow, show }) => {
   const { inputData, setInputData, handleInputChange, handleSubmit } =
     useAddBookMark();
+  const [showNewCategory, setShowNewCategory] = useState(false);
+
   console.log(inputData);
   return (
     <ModalLayout handleShow={handleShow} show={show}>
@@ -83,39 +85,89 @@ const AddBookMarkModal = ({ handleShow, show }) => {
             />
           </div>
         </div>
-        <div className="pt-3">
+        <div>
           <label className="form-label inline-block mb-2 text-gray-700 text-[14px] font-[400]">
-            New Category<font className="text-red-500">*</font>
+            Category<font className="text-red-500">*</font>
           </label>
-          <Input
-            type="text"
-            name="newCategory"
-            id="newCategory"
-            placeholder="Add New Category"
-            autoComplete="off"
-            className=" outline-none rounded py-3 px-2 w-full focus:bg-[#e8f0fe] border-[1px] border-slate-[50] text-[14px]"
-            onChange={(e) => {
-              handleInputChange(e);
-              setInputData((prev) => {
-                let newCategoryError = "";
-                if (!e.target.value) {
-                  newCategoryError = "url is required";
-                } else {
-                  newCategoryError = "";
-                }
-                return {
-                  ...prev,
-                  inputError: {
-                    ...prev.inputError,
-                    newCategoryError,
-                  },
-                };
-              });
-            }}
-            value={inputData?.inputValue?.newCategory}
-            error={inputData?.inputError?.newCategoryError}
-          />
+          <div className="flex space-x-2">
+            <select
+              name="category"
+              id="category"
+              placeholder="select category"
+              disabled={showNewCategory}
+              className=" outline-none rounded py-3 px-2 w-full focus:bg-[#e8f0fe] border-[1px] border-slate-[50] text-[14px]"
+              onChange={(e) => {
+                handleInputChange(e);
+                setInputData((prev) => {
+                  let categoryError = "";
+                  if (!e.target.value) {
+                    categoryError = "category is required";
+                  } else {
+                    categoryError = "";
+                  }
+                  return {
+                    ...prev,
+                    inputError: {
+                      ...prev.inputError,
+                      categoryError,
+                    },
+                  };
+                });
+              }}
+              value={inputData?.inputValue?.category}
+              error={inputData?.inputError?.categoryError}
+            >
+              <option value="">Select a category</option>
+              <option value="1">Category 1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <div>
+              <button
+                type="button"
+                className="bg-primary p-3 text-center text-white"
+                onClick={() => setShowNewCategory(!showNewCategory)}
+              >
+                {showNewCategory ? "-" : "+"}
+              </button>
+            </div>
+          </div>
         </div>
+        {showNewCategory && (
+          <div className="pt-3">
+            <label className="form-label inline-block mb-2 text-gray-700 text-[14px] font-[400]">
+              New Category<font className="text-red-500">*</font>
+            </label>
+            <Input
+              type="text"
+              name="newCategory"
+              id="newCategory"
+              placeholder="Add New Category"
+              autoComplete="off"
+              className=" outline-none rounded py-3 px-2 w-full focus:bg-[#e8f0fe] border-[1px] border-slate-[50] text-[14px]"
+              onChange={(e) => {
+                handleInputChange(e);
+                setInputData((prev) => {
+                  let newCategoryError = "";
+                  if (!e.target.value) {
+                    newCategoryError = "url is required";
+                  } else {
+                    newCategoryError = "";
+                  }
+                  return {
+                    ...prev,
+                    inputError: {
+                      ...prev.inputError,
+                      newCategoryError,
+                    },
+                  };
+                });
+              }}
+              value={inputData?.inputValue?.newCategory}
+              error={inputData?.inputError?.newCategoryError}
+            />
+          </div>
+        )}
 
         <div className="my-3">
           <button
